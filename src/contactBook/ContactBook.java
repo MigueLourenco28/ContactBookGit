@@ -80,6 +80,20 @@ public class ContactBook {
         contacts = tmp;
     }
 
+    public boolean checkRepeatedPhone() {
+        Contact current;
+        initializeIterator();
+        current = contacts[currentContact];
+        while(hasNext()) {
+            for(int i = currentContact + 1; i < counter; i++) {
+                if(current.getPhone().equals(contacts[i].getPhone()))
+                    return true;
+            }
+            current = next();
+        }
+        return false;
+    }
+
     public void initializeIterator() {
         currentContact = 0;
     }
