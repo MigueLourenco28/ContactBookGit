@@ -76,7 +76,7 @@ public class ContactBook {
         return result;
     }
 
-    private String searchIndexName(int phone) {
+    private int searchIndexName(int phone) {
         int i = 0;
         int result = -1;
         boolean found = false;
@@ -102,7 +102,7 @@ public class ContactBook {
         current = contacts[currentContact];
         while(hasNext()) {
             for(int i = currentContact + 1; i < counter; i++) {
-                if(current.getPhone().equals(contacts[i].getPhone()))
+                if(current.getPhone() == (contacts[i].getPhone()) )
                     return true;
             }
             current = next();
