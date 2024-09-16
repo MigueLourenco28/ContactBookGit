@@ -43,6 +43,10 @@ public class ContactBook {
     //Pre: phone != null
     public String getName(int phone) { return contacts[searchIndexName(phone)].getName();}
 
+    public boolean hasContactPhone(int phone) {
+        return searchIndexName(phone) >= 0;
+    }
+
     //Pre: name != null && hasContact(name)
     public int getPhone(String name) {
         return contacts[searchIndex(name)].getPhone();
