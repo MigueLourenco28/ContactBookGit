@@ -15,6 +15,7 @@ public class Main {
     public static final String LIST_CONTACTS  = "LC";
     public static final String QUIT           = "Q";
     public static final String GIVEN_PHONE    = "GN";
+    public static final String DUPLICATE = "EP";
 
     //Constantes que definem as mensagens para o utilizador
     public static final String CONTACT_EXISTS = "contactBook.Contact already exists.";
@@ -25,6 +26,11 @@ public class Main {
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
+    public static final String NUMBER_NOT_EXIST = "Número de telefone não existe.";
+    public static final String CONTACT_SHARE = "Há contatos que compartilham números de telefone";
+    public static final String DIFFERENT_CONTACT = "Todos os contatos têm números de telefone diferentes";
+
+
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -53,6 +59,12 @@ public class Main {
                     break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
+                    break;
+                case GIVEN_PHONE:
+                    givenPhone(in, cBook);
+                    break;
+                case DUPLICATE:
+                    duplicatePhone(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -147,5 +159,21 @@ public class Main {
             }
         }
         else System.out.println(BOOK_EMPTY);
+    }
+    private static void givenPhone(Scanner in, ContactBook cBook) {
+        int phone = in.nextInt(); in.nextLine();
+        String name = cBook.getName(phone);
+        if (cBook.getNumberOfContacts() == 0) {
+            System.out.println(BOOK_EMPTY);
+        }
+        else {if (name == null){
+            System.out.println(NUMBER_NOT_EXIST);}
+        else {System.out.println(name);}}
+    }
+    private static void duplicatePhone(ContactBook cBook) {
+        if (cBook.checkRepeatedPhone()) {
+            System.out.println(DIFFERENT_CONTACT);
+        }
+        else System.out.println(CONTACT_SHARE);
     }
 }
